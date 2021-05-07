@@ -2,22 +2,23 @@ package com.company;
 
 import java.util.Objects;
 
-public class Stack<T> implements Actionable<T> {
+public class Stack<E> implements Actionable<E> {
     public static final int STACK_SIZE = 10;
-    private T[] array;
+    private E[] array;
     private BlackList list;
     private int size;
 
     public Stack(BlackList list) {
-        this.array = (T[]) new Object[STACK_SIZE];
+        this.array = (E[]) new Object[STACK_SIZE];
         this.list = list;
         this.size = 0;
     }
 
     @Override
-    public void push(T item) {
+    public void push(E item) {
         if (item != null) {
-            final boolean isPresent = list.isPresent(item.getClass());
+
+            boolean isPresent = list.isPresent(item.getClass());
 
             if (!isPresent) {
 
@@ -29,22 +30,31 @@ public class Stack<T> implements Actionable<T> {
                     }
                 }
 
+            } else {
+                throw new IllegalArgumentException("This class "
+                        + item.getClass().getSimpleName()
+                        + " is in blacklist");
             }
-            throw new IllegalArgumentException("This class "
-                    + item.getClass().getSimpleName()
-                    + " is in blacklist");
+
         } else {
             throw new IllegalArgumentException("Item can't be null");
         }
+//        for (int i = 0; i < array.length; i++) {
+//            if (Objects.isNull(array[i])) {
+//                array[i] = item;
+//                ++size;
+//                break;
+//            }
+//        }
 
     }
 
     @Override
-    public T delete() {
+    public E delete() {
         if (size == 0) {
             throw new RuntimeException("Can't delete from empty Stack");
         }
-        T item = array[size];
+        E item = array[size];
 
         array[size] = null;
         --size;
@@ -53,12 +63,12 @@ public class Stack<T> implements Actionable<T> {
     }
 
     @Override
-    public T get() {
+    public E get() {
         if (size == 0) {
             throw new RuntimeException("Can't delete from empty Stack");
 
         }
-        return array[0];
+        return array[size-1];
 
     }
 

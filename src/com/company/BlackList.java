@@ -18,13 +18,15 @@ public class BlackList {
         }
     }
 
-    public boolean isPresent(Class object){
+    public boolean isPresent(Class object) {
+        boolean result = false;
         for (Class aClass : classes) {
-            if(aClass.equals(object)){
-                return true;
+            if (Objects.nonNull(aClass) && aClass.equals(object)) {
+                result = true;
+                break;
             }
         }
 
-        return false;
+        return result;
     }
 }

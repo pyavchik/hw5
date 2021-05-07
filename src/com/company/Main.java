@@ -10,5 +10,8 @@ public class Main {
         stack.push("2");
         stack.push("3");
 
+        stack.delete();
+
+        System.out.println(stack.get());
     }
 }
