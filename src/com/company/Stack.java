@@ -39,13 +39,6 @@ public class Stack<E> implements Actionable<E> {
         } else {
             throw new IllegalArgumentException("Item can't be null");
         }
-//        for (int i = 0; i < array.length; i++) {
-//            if (Objects.isNull(array[i])) {
-//                array[i] = item;
-//                ++size;
-//                break;
-//            }
-//        }
 
     }
 
